@@ -18,9 +18,10 @@ source:
     - 0002-nuke-post-install.patch
     - 0003-remove-PATH-pth-hack.patch
     - 0004-remove-JOB_OBJECT_RESERVED_LIMIT_VALID_FLAGS.patch
+    - 0005-override-mfc-path.patch
 
 build:
-  number: 1
+  number: 2
   skip: True  # [not win]
 
 requirements:

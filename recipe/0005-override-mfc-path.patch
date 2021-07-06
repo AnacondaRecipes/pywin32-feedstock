@@ -1,0 +1,30 @@
+diff --git a/setup.py b/setup.py
+index 914f659..382c8c9 100644
+--- a/setup.py
++++ b/setup.py
+@@ -876,13 +876,18 @@ class my_build_ext(build_ext):
+         else:
+             plat_dir = "x86"
+         # Find the redist directory.
+-        vckey = winreg.OpenKey(winreg.HKEY_LOCAL_MACHINE,
+-                               product_key,
+-                               0,
+-                               access,
+-                               )
+-        val = winreg.QueryValueEx(vckey, "ProductDir")[0]
+-        mfc_dir = os.path.join(val, "redist", plat_dir, mfc_dir)
++        try:
++            vckey = winreg.OpenKey(winreg.HKEY_LOCAL_MACHINE,
++                                   product_key,
++                                   0,
++                                   access,
++                                   )
++            val = winreg.QueryValueEx(vckey, "ProductDir")[0]
++            mfc_dir = os.path.join(val, "redist", plat_dir, mfc_dir)
++        except:
++            print("Unable to load MFC path with vckey; using absolute path of MFC env var instead")
++            orig_mfc_dir = os.getenv("MFC_PATH"); mfc_dir_bak = os.getenv("MFC_PATH_BAK"); mfc_dir = orig_mfc_dir if os.path.exists(orig_mfc_dir) else mfc_dir_bak
++
+         if os.path.isdir(mfc_dir):
+             # Ensuring absolute paths
+             mfc_contents = [os.path.join(mfc_dir, mfc_file) for mfc_file in mfc_files]
