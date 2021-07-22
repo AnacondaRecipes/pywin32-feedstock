@@ -1,0 +1,15 @@
+--- a/setup.py       2020-06-12 22:39:03.000000000 -0700
++++ b/setup.py       2021-07-22 13:23:07.000000000 -0700
+@@ -1044,9 +1043,9 @@
+             raise RuntimeError("No MFC files found!")
+
+         for mfc_content in mfc_contents:
+-            shutil.copyfile(mfc_content,
+-                            os.path.join(target_dir, os.path.split(mfc_content)[1]),
+-                            )
++            dest = os.path.join(target_dir, os.path.split(mfc_content)[1])
++            print("Copying '{}' to '{}'".format(mfc_content, dest))
++            shutil.copyfile(mfc_content, dest)
+
+
+     def build_exefile(self, ext):

@@ -14,6 +14,7 @@ source:
     - fix-formatting.patch
     # HACK: Avoid https://bugs.python.org/issue42009
     - ensure-PythonService-mc-before-cpp.patch
+    - add-verbosity-to-setup-py.patch
 
 build:
   number: 1
