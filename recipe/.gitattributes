@@ -8,3 +8,4 @@
 Outlook2010MAPIHeaderFiles/* binary
 fix-formatting.patch binary
 ensure-PythonService-mc-before-cpp.patch binary
+add-verbosity-to-setup-py.patch binary
