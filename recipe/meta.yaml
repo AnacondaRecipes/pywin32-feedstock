@@ -26,7 +26,6 @@ build:
 requirements:
   build:
     - {{ compiler("c") }}
-    - m2-patch
   host:
     - python
     - pip
