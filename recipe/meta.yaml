@@ -18,18 +18,18 @@ source:
 
 build:
   number: 1
-  script:
-    - {{ PYTHON }} setup.py -q install --record=record.txt --skip-verstamp
-    - copy %PREFIX%\Lib\site-packages\pywin32_system32\*.dll %PREFIX%\Lib\site-packages\win32\
-    - copy %PREFIX%\Lib\site-packages\pywin32_system32\*.dll %LIBRARY_BIN%\
-  skip: true  # [not win or py27]
+  skip: True  # [not win]
 
 requirements:
   build:
     - {{ compiler("c") }}
+    - m2-patch  # [win]
+    - m2-gcc-libs  # [win]
+    - patch  # [not win]
   host:
     - python
     - pip
+    - setuptools
   run:
     - python
 
