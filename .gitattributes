@@ -3,4 +3,7 @@
 meta.yaml text eol=lf
 build.sh text eol=lf
 bld.bat text eol=crlf
-*.patch text eol=lf
+# This is needed so that on build servers we don't
+# automatically set line endings to crlf. Git defaults
+# to `core.autocrlf = true` on windows.
+*.patch binary
