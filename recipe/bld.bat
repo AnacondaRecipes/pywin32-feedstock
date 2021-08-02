@@ -1,7 +1,7 @@
 setlocal enabledelayedexpansion
 REM NOTE: this calls python files directly during the build process, relying on your file associations.
 REM    when building this recipe, you need to associate python files with C:\aroot\stage\pythonw.exe for best results.
-
+set PY3K=1
 :: UCRT builds requires using Windows 8.1 SDK and that
 :: does not provide the MAPI headers.
 if %PY3K%==1 (
@@ -14,7 +14,7 @@ if %UCRT_BUILD%==1 (
     set "INCLUDE=%INCLUDE%%RECIPE_DIR%\Outlook2010MAPIHeaderFiles;"
 )
 
-%PYTHON% setup.py install
+%PYTHON% setup.py install --record=record.txt --skip-verstamp
 
 :: below here, we copy MFC and ATL redistributable DLLs into places that should be on PATH
 set VC_PATH=x86
