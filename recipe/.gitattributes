@@ -6,3 +6,6 @@
 0004-fix-mapi-compile-errors.patch binary
 0005-remove-JOB_OBJECT_RESERVED_LIMIT_VALID_FLAGS.patch binary
 Outlook2010MAPIHeaderFiles/* binary
+fix-formatting.patch binary
+ensure-PythonService-mc-before-cpp.patch binary
+add-verbosity-to-setup-py.patch binary
