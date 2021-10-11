@@ -1,4 +1,4 @@
-{% set version = "228" %}
+{% set version = "302" %}
 
 package:
   name: pywin32
@@ -6,7 +6,7 @@ package:
 
 source:
   url: https://github.com/mhammond/pywin32/archive/b{{ version }}.tar.gz
-  sha256: 894cde85c251a3da6d341a711d7259ca11097bfd1b16e10024988790aa5c81b1
+  sha256: 47fd53c0561ff3019043e86880597aacbd736910d8add485117d8ad055441927
   patches:
     - disable_exchange_modules.patch
     - 0003-remove-PATH-pth-hack.patch
