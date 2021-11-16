@@ -1,4 +1,8 @@
 cxx_compiler:  # [win]
   - vs2019     # [win]
+  - vs2019     # [win]
+  - vs2019     # [win]
 c_compiler:    # [win]
+  - vs2019     # [win]
+  - vs2019     # [win]
   - vs2019     # [win]
