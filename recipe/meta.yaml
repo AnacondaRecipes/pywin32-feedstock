@@ -41,6 +41,7 @@ about:
   description: |
     A set of extension modules that provides access to many of the Windows API functions.
   dev_url: https://github.com/mhammond/pywin32
+  doc_url: https://mhammond.github.io/pywin32
 
 extra:
   recipe-maintainers:
