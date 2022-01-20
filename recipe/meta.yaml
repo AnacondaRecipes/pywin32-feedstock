@@ -11,10 +11,10 @@ source:
     - disable_exchange_modules.patch
     - 0003-remove-PATH-pth-hack.patch
     # https://github.com/mhammond/pywin32/commit/9fbc2ed3c0d69aca2475975a599cc316016599d3
-    - fix-formatting.patch
+    # - fix-formatting.patch
     # HACK: Avoid https://bugs.python.org/issue42009
-    - ensure-PythonService-mc-before-cpp.patch
-    - add-verbosity-to-setup-py.patch
+    # - ensure-PythonService-mc-before-cpp.patch
+    # - add-verbosity-to-setup-py.patch
 
 build:
   number: 1
@@ -35,12 +35,15 @@ requirements:
 
 about:
   home: https://github.com/mhammond/pywin32
-  license: PSF-2.0
+  # For more detail on the license look at the following issue
+  # https://github.com/mhammond/pywin32/issues/1127
+  license: HPND AND BSD-3-Clause AND LGPL-2.0
   license_file: Pythonwin/License.txt
   summary: Python extensions for Windows
   description: |
     A set of extension modules that provides access to many of the Windows API functions.
   dev_url: https://github.com/mhammond/pywin32
+  doc_url: https://mhammond.github.io/pywin32
 
 extra:
   recipe-maintainers:
