@@ -1,15 +1,18 @@
-{% set version = "302" %}
+{% set name = "pywin32" %}
+{% set version = "304" %}
+{% set build = 0" %}
+{% set checksum = "23e43eaacca3161565b2adc71f75625d9011087379e60fcdfb5238e187169246" %}
 
 package:
-  name: pywin32
+  name: {{ name }}
   version: {{ version }}
 
 source:
   url: https://github.com/mhammond/pywin32/archive/b{{ version }}.tar.gz
-  sha256: 47fd53c0561ff3019043e86880597aacbd736910d8add485117d8ad055441927
+  sha256: {{ checksum }}
   patches:
-    - disable_exchange_modules.patch
-    - 0003-remove-PATH-pth-hack.patch
+    - patches/disable_exchange_modules.patch
+    - patches/0003-remove-PATH-pth-hack.patch
     # https://github.com/mhammond/pywin32/commit/9fbc2ed3c0d69aca2475975a599cc316016599d3
     # - fix-formatting.patch
     # HACK: Avoid https://bugs.python.org/issue42009
@@ -17,7 +20,7 @@ source:
     # - add-verbosity-to-setup-py.patch
 
 build:
-  number: 2
+  number: {{ build }}
   skip: True  # [not win]
 
 requirements:
