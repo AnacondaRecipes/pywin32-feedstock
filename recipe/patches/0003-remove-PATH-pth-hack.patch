@@ -8,16 +8,21 @@ Subject: [PATCH 3/4] remove PATH pth hack
  1 file changed, 4 insertions(+), 3 deletions(-)
 
 diff --git a/pywin32.pth b/pywin32.pth
-index b57c496..0b75a1e 100644
+index b57c4964..fe918330 100644
 --- a/pywin32.pth
 +++ b/pywin32.pth
-@@ -2,6 +2,7 @@
- win32
- win32\lib
- Pythonwin
+@@ -1,7 +1,8 @@
+-# .pth file for the PyWin32 extensions
+-win32
+-win32\lib
+-Pythonwin
 -# And some hackery to deal with environments where the post_install script
 -# isn't run.
 -import pywin32_bootstrap
++# .pth file for the PyWin32 extensions
++win32
++win32\lib
++Pythonwin
 +# This breaks any software involving a feedback loop involving PATH and Python
 +# One example of such software is the Anaconda Distribition's conda package
 +# manager, so we do not do it. We fixed this in a slightly better way anyway.
