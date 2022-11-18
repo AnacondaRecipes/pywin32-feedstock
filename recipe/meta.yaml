@@ -16,7 +16,8 @@ build:
       set "STDLIB_DIR=%PREFIX%\Lib;%PREFIX%;%LIBRARY_BIN%"                                       
       {{ PYTHON }} setup.py -q install --record=record.txt --skip-verstamp                       
       echo "sleeping for 15"                                                                     
-      {{ PYTHON }} -c "import time; time.sleep(15)"                                              
+      {{ PYTHON }} -c "import time; time.sleep(15)"  
+      {{ PYTHON }} pywin32_postinstall.py -install                                            
       echo "Copying over stray DLLS"                                                             
       if %ERRORLEVEL% neq 0 exit 1                                                               
       dir %PREFIX%\Lib\site-packages\win32\py*.dll                                               
