@@ -3,7 +3,7 @@ index e74e6d9..4e1eef1 100644
 --- a/setup.py
 +++ b/setup.py
 @@ -584,11 +584,10 @@ class my_build_ext(build_ext):
- 
+
      def _why_cant_build_extension(self, ext):
          # Return None, or a reason it can't be built.
 -        # Exclude exchange 32-bit utility libraries from 64-bit
