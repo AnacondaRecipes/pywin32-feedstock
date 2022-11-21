@@ -1,7 +1,7 @@
 {% set name = "pywin32" %}
-{% set version = "304" %}
+{% set version = "305" %}
 {% set build = "0" %}
-{% set checksum = "23e43eaacca3161565b2adc71f75625d9011087379e60fcdfb5238e187169246" %}
+{% set checksum = "a6d7a5c5578ad0bbb4a8f9cf6ff277612dab5c21a614ea243a5bf72882f4cbca" %}
 
 package:
   name: {{ name }}
