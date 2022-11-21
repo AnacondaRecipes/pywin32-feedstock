@@ -13,6 +13,8 @@ source:
   patches:
     - patches/0001-remove-PATH-pth-hack.patch
     - patches/0002-disable_exchange_modules.patch
+    - patches/0003-MSVC_dirs_setup.patch
+    - patches/0004-MSVC_dirs_setup_fix.patch
 
 build:
   number: {{ build }}

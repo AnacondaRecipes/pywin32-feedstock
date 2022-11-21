@@ -1,0 +1,18 @@
+This patch makes a tweak to the MSVC directory search code
+included in 0003-MSVC_dirs_setup.patch. Without this, the
+correct directory for the mfc140u.dll will not be found
+on our builders.
+
+diff --git a/setup.py b/setup.py
+index eea0d0fc..3d27b1c0 100644
+--- a/setup.py
++++ b/setup.py
+@@ -651,7 +651,7 @@ class my_build_ext(build_ext):
+             redist_globs.append(
+                 vcbase[: m.start()]
+                 + r"\VC\Redist\MSVC\%s%s\*\mfc140u.dll"
+-                % (vcverdir or "*\\", self.plat_dir)
++                % ("*\\", self.plat_dir)
+             )
+         # Only mfcNNNu DLL is required (mfcmNNNX is Windows Forms, rest is ANSI)
+         mfc_contents = next(filter(None, map(glob.glob, redist_globs)), [])[:1]
