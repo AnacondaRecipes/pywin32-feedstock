@@ -19,6 +19,10 @@ source:
 build:
   number: {{ build }}
   skip: True  # [not win]
+  missing_dso_whitelist:
+    - $RPATH/axscript.pyd
+    - $RPATH/win32ui.pyd
+    - $RPATH/win32uiole.pyd
 
 requirements:
   build:
