@@ -4,9 +4,13 @@ set "STDLIB_DIR=%PREFIX%\Lib;%PREFIX%;%LIBRARY_BIN%"
 %PYTHON% setup.py install --record=record.txt --skip-verstamp
 
 copy %PREFIX%\Lib\site-packages\pythonwin\*.pyd %PREFIX%\Lib\site-packages\win32
+if errorlevel 1 exit /b 1
 copy %PREFIX%\Lib\site-packages\pythonwin\*.dll %PREFIX%\Lib\site-packages\win32
+if errorlevel 1 exit /b 1
 copy %PREFIX%\Lib\site-packages\pythonwin\*.pyd %LIBRARY_BIN%\
+if errorlevel 1 exit /b 1
 copy %PREFIX%\Lib\site-packages\pythonwin\*.dll %LIBRARY_BIN%\
+if errorlevel 1 exit /b 1
 
 :: Fix for https://sourceforge.net/p/pywin32/mailman/message/29498528/
 :: although on that bug report Glenn Linderman claims this fix does
@@ -29,11 +33,16 @@ copy %PREFIX%\Lib\site-packages\pythonwin\*.dll %LIBRARY_BIN%\
 :: An actual fix would be to make win32api a Python module that
 :: first imports pywintypes and after that imports _win32api.
 copy %PREFIX%\Lib\site-packages\pywin32_system32\*.dll %PREFIX%\Lib\site-packages\win32\
+if errorlevel 1 exit /b 1
 
 :: I have no idea why sometimes, at random, these do not get copied. They are neccesary!
 copy %PREFIX%\Lib\site-packages\pywin32_system32\*.dll %LIBRARY_BIN%\
+if errorlevel 1 exit /b 1
 
 copy %PREFIX%\Lib\site-packages\win32comext\axscript\axscript.pyd %LIBRARY_BIN%\
+if errorlevel 1 exit /b 1
 
 dir %LIBRARY_BIN%\
 dir %PREFIX%\Lib\site-packages\win32\py*.dll
+
+exit 0
