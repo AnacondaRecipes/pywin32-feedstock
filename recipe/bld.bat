@@ -3,6 +3,23 @@ setlocal enabledelayedexpansion
 set "STDLIB_DIR=%PREFIX%\Lib;%PREFIX%;%LIBRARY_BIN%"
 %PYTHON% setup.py install --record=record.txt --skip-verstamp
 
+:: setup.py spawns a background process to run a post-install script
+:: (pywin32_postinstall.py). This may still be running once we get here.
+:: Adding a timeout to wait for it to complete seems to be the only way
+:: to semi-reliably get this to build.
+
+:: If we proceed immediately without waiting, some DLLs may not be in
+:: their expected locations yet, and the copys below will fail.
+:: This issue is mentioned by conda-forge's pywin32-feedstock maintainers here:
+:: https://github.com/conda-forge/pywin32-feedstock/pull/42#discussion_r745326106
+:: Ray Donnelly's comment near the bottom of this file indicates he encountered
+:: this back in 2017 as well.
+
+:: Adding a timeout to wait for something that takes an indeterminate amount of
+:: time to complete is not a good solution, but it will have to do for now.
+
+timeout 15 > NUL
+
 copy %PREFIX%\Lib\site-packages\pythonwin\*.pyd %PREFIX%\Lib\site-packages\win32
 if errorlevel 1 exit /b 1
 copy %PREFIX%\Lib\site-packages\pythonwin\*.dll %PREFIX%\Lib\site-packages\win32
