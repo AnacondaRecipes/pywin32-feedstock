@@ -46,8 +46,6 @@ copy %PREFIX%\Lib\site-packages\pythonwin\*.pyd %PREFIX%\Lib\site-packages\win32
 if errorlevel 1 exit /b 1
 copy %PREFIX%\Lib\site-packages\pythonwin\*.dll %PREFIX%\Lib\site-packages\win32
 if errorlevel 1 exit /b 1
-copy %PREFIX%\Lib\site-packages\pythonwin\*.pyd %LIBRARY_BIN%\
-if errorlevel 1 exit /b 1
 copy %PREFIX%\Lib\site-packages\pythonwin\*.dll %LIBRARY_BIN%\
 if errorlevel 1 exit /b 1
 
@@ -76,9 +74,6 @@ if errorlevel 1 exit /b 1
 
 :: I have no idea why sometimes, at random, these do not get copied. They are neccesary!
 copy %PREFIX%\Lib\site-packages\pywin32_system32\*.dll %LIBRARY_BIN%\
-if errorlevel 1 exit /b 1
-
-copy %PREFIX%\Lib\site-packages\win32comext\axscript\axscript.pyd %LIBRARY_BIN%\
 if errorlevel 1 exit /b 1
 
 dir %LIBRARY_BIN%\
