@@ -36,6 +36,17 @@ requirements:
   run:
     - python
 
+test:
+  files:
+    - test_win32gui.py
+  requires:
+    - pip
+    - python
+  commands:
+    - pip check
+    - python run_test.py
+    - python test_win32gui.py
+
 about:
   home: https://github.com/mhammond/pywin32
   # For more detail on the license look at the following issue
