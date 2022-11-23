@@ -3,22 +3,44 @@ setlocal enabledelayedexpansion
 set "STDLIB_DIR=%PREFIX%\Lib;%PREFIX%;%LIBRARY_BIN%"
 %PYTHON% setup.py install --record=record.txt --skip-verstamp
 
-:: setup.py spawns a background process to run a post-install script
-:: (pywin32_postinstall.py). This may still be running once we get here.
-:: Adding a timeout to wait for it to complete seems to be the only way
-:: to semi-reliably get this to build.
+:: setup.py spawns a background process to run the pywin32_postinstall.py script.
+:: This may still be running once we get here.
 
-:: If we proceed immediately without waiting, some DLLs may not be in
-:: their expected locations yet, and the copys below will fail.
+:: If we immediately attempt to copy DLLs to their final destination, some
+:: of them may not be in their expected locations yet, and our copys will fail.
 :: This issue is mentioned by conda-forge's pywin32-feedstock maintainers here:
 :: https://github.com/conda-forge/pywin32-feedstock/pull/42#discussion_r745326106
 :: Ray Donnelly's comment near the bottom of this file indicates he encountered
 :: this back in 2017 as well.
 
-:: Adding a timeout to wait for something that takes an indeterminate amount of
-:: time to complete is not a good solution, but it will have to do for now.
+:: To address this issue, we will wait for the DLLs to appear before proceeding.
 
-timeout 15 > NUL
+set /a COUNTER=0
+:WaitForPyWinTypesDLL
+if exist %PREFIX%\Lib\site-packages\pywin32_system32\pywintypes*.dll goto FoundPyWinTypesDLL
+echo Waiting for pywintypes DLL
+set /a COUNTER=%COUNTER%+1
+if %COUNTER%==120 exit 1
+timeout /t 1 > NUL
+goto WaitForPyWinTypesDLL
+:FoundPyWinTypesDLL
+echo Found pywintypes DLL
+
+set /a COUNTER=0
+:WaitForPythonCOMDLL
+if exist %PREFIX%\Lib\site-packages\pywin32_system32\pythoncom*.dll goto FoundPythonCOMDLL
+echo Waiting for pythoncom DLL
+set /a COUNTER=%COUNTER%+1
+if %COUNTER%==120 exit 1
+timeout /t 1 > NUL
+goto WaitForPythonCOMDLL
+:FoundPythonCOMDLL
+echo Found pythoncom DLL
+
+:; The post-install script does other things in addition to copying DLLs.
+:: This may not be necessary, but an extra timeout is added here to allow it finish.
+
+timeout /t 10 > NUL
 
 copy %PREFIX%\Lib\site-packages\pythonwin\*.pyd %PREFIX%\Lib\site-packages\win32
 if errorlevel 1 exit /b 1
