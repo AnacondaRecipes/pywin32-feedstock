@@ -40,7 +40,7 @@ about:
   home: https://github.com/mhammond/pywin32
   # For more detail on the license look at the following issue
   # https://github.com/mhammond/pywin32/issues/1127
-  license: HPND AND BSD-3-Clause AND LGPL-2.0
+  license: HPND AND BSD-3-Clause AND LGPL-2.0-or-later
   license_file: Pythonwin/License.txt
   summary: Python extensions for Windows
   description: |
