@@ -40,6 +40,18 @@ import win32ts
 import win32wnet
 
 import os
+import glob
+
+print(
+    list(
+        glob.glob(
+            os.path.join(
+                os.environ["LIBRARY_BIN"],
+                'py*.dll'
+            )
+        )
+    )
+)
 
 conda_py = str(os.sys.version_info.major) + str(os.sys.version_info.minor)
 
