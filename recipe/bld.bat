@@ -15,9 +15,14 @@ set "STDLIB_DIR=%PREFIX%\Lib;%PREFIX%;%LIBRARY_BIN%"
 
 :: To address this issue, we will wait for the DLLs to appear before proceeding.
 
+for /f "tokens=1,2 delims=. " %%a in ("%PY_VER%") do (
+   set "PY_MAJOR=%%a"
+   set "PY_MINOR=%%b"
+)
+
 set /a COUNTER=0
 :WaitForPyWinTypesDLL
-if exist %PREFIX%\Lib\site-packages\pywin32_system32\pywintypes*.dll goto FoundPyWinTypesDLL
+if exist %PREFIX%\Lib\site-packages\pywin32_system32\pywintypes%PY_MAJOR%%PY_MINOR%.dll goto FoundPyWinTypesDLL
 echo Waiting for pywintypes DLL
 set /a COUNTER=%COUNTER%+1
 if %COUNTER%==120 exit 1
@@ -28,7 +33,7 @@ echo Found pywintypes DLL
 
 set /a COUNTER=0
 :WaitForPythonCOMDLL
-if exist %PREFIX%\Lib\site-packages\pywin32_system32\pythoncom*.dll goto FoundPythonCOMDLL
+if exist %PREFIX%\Lib\site-packages\pywin32_system32\pythoncom%PY_MAJOR%%PY_MINOR%.dll goto FoundPythonCOMDLL
 echo Waiting for pythoncom DLL
 set /a COUNTER=%COUNTER%+1
 if %COUNTER%==120 exit 1
