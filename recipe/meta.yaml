@@ -51,9 +51,14 @@ about:
   home: https://github.com/mhammond/pywin32
   # For more detail on the license look at the following issue
   # https://github.com/mhammond/pywin32/issues/1127
-  license: HPND AND BSD-3-Clause AND LGPL-2.0-or-later
-  license_file: Pythonwin/License.txt
-  summary: Python extensions for Windows
+  license: HPND AND BSD-3-Clause AND LGPL-2.1-or-later AND MIT
+  license_file:
+    - Pythonwin/License.txt  # BSD-3-CLause
+    - Pythonwin/Scintilla/License.txt  # MIT
+    - win32/License.txt  # BSD-3-CLause
+    - com/License.txt  # BSD-3-CLause
+    - com/win32comext/mapi/src/mapi_stub_library/LICENSE  # MIT
+    - adodbapi/license.txt  # LGPL-2.1-or-later  summary: Python extensions for Windows
   description: |
     A set of extension modules that provides access to many of the Windows API functions.
   dev_url: https://github.com/mhammond/pywin32
