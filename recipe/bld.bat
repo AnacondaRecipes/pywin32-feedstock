@@ -37,7 +37,7 @@ if exist %PREFIX%\Lib\site-packages\pywin32_system32\pythoncom%PY_MAJOR%%PY_MINO
 echo Waiting for pythoncom DLL
 set /a COUNTER=%COUNTER%+1
 if %COUNTER%==120 exit 1
-timeout /t 1 > NUL
+ping 127.0.0.1 -n 1  1>NUL 
 goto WaitForPythonCOMDLL
 :FoundPythonCOMDLL
 echo Found pythoncom DLL
@@ -45,7 +45,7 @@ echo Found pythoncom DLL
 :; The post-install script does other things in addition to copying DLLs.
 :: This may not be necessary, but an extra timeout is added here to allow it finish.
 
-timeout /t 10 > NUL
+ping 127.0.0.1 -n 10  1>NUL 
 
 copy %PREFIX%\Lib\site-packages\pythonwin\*.pyd %PREFIX%\Lib\site-packages\win32
 if errorlevel 1 exit /b 1
