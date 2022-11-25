@@ -77,10 +77,9 @@ if errorlevel 1 exit /b 1
 copy %PREFIX%\Lib\site-packages\pywin32_system32\*.dll %PREFIX%\Lib\site-packages\win32\
 if errorlevel 1 exit /b 1
 
-:: I have no idea why sometimes, at random, these do not get copied. They are neccesary!
-:: --> The post install script had code to remove these files. Patch 0004-Isolate_post_install_to_prefix.patch should fix this.
-@REM copy %PREFIX%\Lib\site-packages\pywin32_system32\*.dll %LIBRARY_BIN%\
-@REM if errorlevel 1 exit /b 1
+:: The post install script had code that remove those files. See patch 0004.
+copy %PREFIX%\Lib\site-packages\pywin32_system32\*.dll %LIBRARY_BIN%\
+if errorlevel 1 exit /b 1
 
 dir %LIBRARY_BIN%\
 dir %PREFIX%\Lib\site-packages\win32\py*.dll
