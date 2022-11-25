@@ -14,6 +14,7 @@ source:
     - patches/0001-remove-PATH-pth-hack.patch
     - patches/0002-MSVC_dirs_setup.patch
     - patches/0003-MSVC_dirs_setup_fix.patch
+    - patches/0004-Isolate_post_install_to_prefix.patch
 
 build:
   number: {{ build }}
