@@ -1,38 +1,14 @@
 setlocal enabledelayedexpansion
-REM NOTE: this calls python files directly during the build process, relying on your file associations.
-REM    when building this recipe, you need to associate python files with C:\aroot\stage\pythonw.exe for best results.
-set PY3K=1
-:: UCRT builds requires using Windows 8.1 SDK and that
-:: does not provide the MAPI headers.
-if %PY3K%==1 (
-    set UCRT_BUILD=1
-) else (
-    set UCRT_BUILD=0
-)
 
-if %UCRT_BUILD%==1 (
-    set "INCLUDE=%INCLUDE%%RECIPE_DIR%\Outlook2010MAPIHeaderFiles;"
-)
-
+set "STDLIB_DIR=%PREFIX%\Lib;%PREFIX%;%LIBRARY_BIN%"
 %PYTHON% setup.py install --record=record.txt --skip-verstamp
 
-:: below here, we copy MFC and ATL redistributable DLLs into places that should be on PATH
-set VC_PATH=x86
-if "%ARCH%"=="64" (
-    set VC_PATH=x64
-)
-
-if %UCRT_BUILD%==1 (
-    set MSC_VER=14
-) else (
-    set MSC_VER=10
-    if %PY_VER% == 2.7 (
-        set MSC_VER=9
-        if "%ARCH%"=="64" (
-            set VC_PATH=amd64
-        )
-    )
-)
+copy %PREFIX%\Lib\site-packages\pythonwin\*.pyd %PREFIX%\Lib\site-packages\win32
+if errorlevel 1 exit /b 1
+copy %PREFIX%\Lib\site-packages\pythonwin\*.dll %PREFIX%\Lib\site-packages\win32
+if errorlevel 1 exit /b 1
+copy %PREFIX%\Lib\site-packages\pythonwin\*.dll %LIBRARY_BIN%\
+if errorlevel 1 exit /b 1
 
 :: Fix for https://sourceforge.net/p/pywin32/mailman/message/29498528/
 :: although on that bug report Glenn Linderman claims this fix does
@@ -55,16 +31,13 @@ if %UCRT_BUILD%==1 (
 :: An actual fix would be to make win32api a Python module that
 :: first imports pywintypes and after that imports _win32api.
 copy %PREFIX%\Lib\site-packages\pywin32_system32\*.dll %PREFIX%\Lib\site-packages\win32\
+if errorlevel 1 exit /b 1
 
-robocopy "C:\Program Files (x86)\Microsoft Visual Studio %MSC_VER%.0\VC\redist\%VC_PATH%\Microsoft.VC%MSC_VER%0.MFC" "%LIBRARY_BIN%" *.dll /E
-:: UCRT has no ATL dlls: https://msdn.microsoft.com/en-us/library/ms235284(v=vs.140).aspx
-if %UCRT_BUILD%==1 goto no_atl_dlls
-robocopy "C:\Program Files (x86)\Microsoft Visual Studio %MSC_VER%.0\VC\redist\%VC_PATH%\Microsoft.VC%MSC_VER%0.ATL" "%LIBRARY_BIN%" *.dll /E
-:no_atl_dlls
-
-if %PY3K%==1 (
-   del %PREFIX%\Lib\lib2to3\*.pickle
-)
-
-:: I have no idea why sometimes, at random, these do not get copied. They are neccesary!
+:: The post install script had code that remove those files. See patch 0004.
 copy %PREFIX%\Lib\site-packages\pywin32_system32\*.dll %LIBRARY_BIN%\
+if errorlevel 1 exit /b 1
+
+dir %LIBRARY_BIN%\
+dir %PREFIX%\Lib\site-packages\win32\py*.dll
+
+exit 0

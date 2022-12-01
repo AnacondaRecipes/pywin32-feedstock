@@ -1,45 +1,64 @@
-{% set version = "302" %}
+{% set name = "pywin32" %}
+{% set version = "305" %}
+{% set build = "0" %}
+{% set checksum = "a6d7a5c5578ad0bbb4a8f9cf6ff277612dab5c21a614ea243a5bf72882f4cbca" %}
 
 package:
-  name: pywin32
+  name: {{ name }}
   version: {{ version }}
 
 source:
   url: https://github.com/mhammond/pywin32/archive/b{{ version }}.tar.gz
-  sha256: 47fd53c0561ff3019043e86880597aacbd736910d8add485117d8ad055441927
+  sha256: {{ checksum }}
   patches:
-    - disable_exchange_modules.patch
-    - 0003-remove-PATH-pth-hack.patch
-    # https://github.com/mhammond/pywin32/commit/9fbc2ed3c0d69aca2475975a599cc316016599d3
-    # - fix-formatting.patch
-    # HACK: Avoid https://bugs.python.org/issue42009
-    # - ensure-PythonService-mc-before-cpp.patch
-    # - add-verbosity-to-setup-py.patch
+    - patches/0001-remove-PATH-pth-hack.patch
+    - patches/0002-MSVC_dirs_setup.patch
+    - patches/0003-MSVC_dirs_setup_fix.patch
+    - patches/0004-post_install_script_fix.patch
 
 build:
-  number: 2
+  number: {{ build }}
   skip: True  # [not win]
+  missing_dso_whitelist:
+    - $RPATH/axscript.pyd
+    - $RPATH/win32ui.pyd
+    - $RPATH/win32uiole.pyd
 
 requirements:
   build:
     - {{ compiler("c") }}
-    - m2-patch  # [win]
-    - m2-gcc-libs  # [win]
-    - patch  # [not win]
+    - m2-patch
+    - m2-gcc-libs
   host:
     - python
     - pip
     - setuptools
+    - wheel
   run:
     - python
+
+test:
+  files:
+    - test_win32gui.py
+  requires:
+    - pip
+  commands:
+    - pip check
+    - python run_test.py
+    - python test_win32gui.py
 
 about:
   home: https://github.com/mhammond/pywin32
   # For more detail on the license look at the following issue
   # https://github.com/mhammond/pywin32/issues/1127
-  license: HPND AND BSD-3-Clause AND LGPL-2.0
-  license_file: Pythonwin/License.txt
-  summary: Python extensions for Windows
+  license: HPND AND BSD-3-Clause AND LGPL-2.1-or-later AND MIT
+  license_file:
+    - Pythonwin/License.txt  # BSD-3-CLause
+    - Pythonwin/Scintilla/License.txt  # MIT
+    - win32/License.txt  # BSD-3-CLause
+    - com/License.txt  # BSD-3-CLause
+    - com/win32comext/mapi/src/mapi_stub_library/LICENSE  # MIT
+    - adodbapi/license.txt  # LGPL-2.1-or-later  summary: Python extensions for Windows
   description: |
     A set of extension modules that provides access to many of the Windows API functions.
   dev_url: https://github.com/mhammond/pywin32
