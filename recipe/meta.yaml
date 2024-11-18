@@ -10,9 +10,6 @@ source:
   sha256: 013ac06e7e59cb069df743c76a25545f359af1a6441a2d6e91e87429ee651851
   patches:
     - patches/0001-remove-PATH-pth-hack.patch
-    - patches/0002-MSVC_dirs_setup.patch
-    - patches/0003-MSVC_dirs_setup_fix.patch
-    - patches/0004-post_install_script_fix.patch
 
 build:
   number: 0
@@ -25,6 +22,7 @@ build:
 requirements:
   build:
     - {{ compiler("c") }}
+    - {{ compiler("cxx") }} 
     - m2-patch
     - m2-gcc-libs
   host:
@@ -57,8 +55,8 @@ about:
     - com/License.txt  # BSD-3-CLause
     - com/win32comext/mapi/src/mapi_stub_library/LICENSE  # MIT
     - adodbapi/license.txt  # LGPL-2.1-or-later  summary: Python extensions for Windows
-  description: |
-    A set of extension modules that provides access to many of the Windows API functions.
+  description: A set of extension modules that provides access to many of the Windows API functions.
+  summary: A set of extension modules that provides access to many of the Windows API functions.
   dev_url: https://github.com/mhammond/pywin32
   doc_url: https://mhammond.github.io/pywin32
 
@@ -67,3 +65,6 @@ extra:
     - mingwandroid
     - nicoddemus
     - carlodri
+  # Explicitly skip license linting because of the license complexity
+  skip-lints:
+    - missing_license_family
