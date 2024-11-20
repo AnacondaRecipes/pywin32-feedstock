@@ -20,6 +20,7 @@ build:
     - $RPATH/win32uiole.pyd
   ignore_run_exports:
     - vs2015_runtime
+
 requirements:
   build:
     - {{ compiler("c") }}
