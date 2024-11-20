@@ -41,7 +41,9 @@ if errorlevel 1 exit /b 1
 copy %PREFIX%\Lib\site-packages\pywin32_system32\*.dll %LIBRARY_BIN%\
 if errorlevel 1 exit /b 1
 
-dir %LIBRARY_BIN%\
-dir %PREFIX%\Lib\site-packages\win32\py*.dll
+echo "Contents of Library\bin:"
+dir /b %PREFIX%\Library\bin\*.dll
+echo "Contents of site-packages\win32:"
+dir /b %PREFIX%\Lib\site-packages\win32\*.dll
 
 exit 0

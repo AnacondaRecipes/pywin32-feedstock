@@ -40,7 +40,8 @@ test:
     - test_win32gui.py
   requires:
     - pip
-  commands:
+  vars:
+    - LIBRARY_BIN=%PREFIX%\Library\bin
     - pip check
     - python run_test.py
     - python test_win32gui.py
