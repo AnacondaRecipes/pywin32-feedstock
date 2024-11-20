@@ -1,5 +1,5 @@
 {% set name = "pywin32" %}
-{% set version = "307" %}
+{% set version = "308" %}
 
 package:
   name: {{ name }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/mhammond/pywin32/archive/b{{ version }}.tar.gz
-  sha256: 013ac06e7e59cb069df743c76a25545f359af1a6441a2d6e91e87429ee651851
+  sha256: 8aa09d39739764bec2378cfbd45940264c8b7f5a24caa17f04a01f7b750799ce
   patches:
     - patches/0001-remove-PATH-pth-hack.patch
 
@@ -18,11 +18,12 @@ build:
     - $RPATH/axscript.pyd
     - $RPATH/win32ui.pyd
     - $RPATH/win32uiole.pyd
-
+  ignore_run_exports:
+    - vs2015_runtime
 requirements:
   build:
     - {{ compiler("c") }}
-    - {{ compiler("cxx") }} 
+    - {{ compiler("cxx") }}
     - m2-patch
     - m2-gcc-libs
   host:

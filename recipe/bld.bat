@@ -1,13 +1,17 @@
 setlocal enabledelayedexpansion
 
 set "STDLIB_DIR=%PREFIX%\Lib;%PREFIX%;%LIBRARY_BIN%"
-%PYTHON% setup.py install --record=record.txt --skip-verstamp
+%PYTHON% setup.py install --record=record.txt
 
 copy %PREFIX%\Lib\site-packages\pythonwin\*.pyd %PREFIX%\Lib\site-packages\win32
 if errorlevel 1 exit /b 1
 copy %PREFIX%\Lib\site-packages\pythonwin\*.dll %PREFIX%\Lib\site-packages\win32
 if errorlevel 1 exit /b 1
 copy %PREFIX%\Lib\site-packages\pythonwin\*.dll %LIBRARY_BIN%\
+if errorlevel 1 exit /b 1
+
+mkdir %PREFIX%\Library\bin
+copy %PREFIX%\Lib\site-packages\win32\*.dll %PREFIX%\Library\bin\
 if errorlevel 1 exit /b 1
 
 :: Fix for https://sourceforge.net/p/pywin32/mailman/message/29498528/
