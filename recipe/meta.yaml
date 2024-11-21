@@ -1,7 +1,5 @@
 {% set name = "pywin32" %}
-{% set version = "305" %}
-{% set build = "0" %}
-{% set checksum = "a6d7a5c5578ad0bbb4a8f9cf6ff277612dab5c21a614ea243a5bf72882f4cbca" %}
+{% set version = "308" %}
 
 package:
   name: {{ name }}
@@ -9,24 +7,24 @@ package:
 
 source:
   url: https://github.com/mhammond/pywin32/archive/b{{ version }}.tar.gz
-  sha256: {{ checksum }}
+  sha256: 8aa09d39739764bec2378cfbd45940264c8b7f5a24caa17f04a01f7b750799ce
   patches:
     - patches/0001-remove-PATH-pth-hack.patch
-    - patches/0002-MSVC_dirs_setup.patch
-    - patches/0003-MSVC_dirs_setup_fix.patch
-    - patches/0004-post_install_script_fix.patch
 
 build:
-  number: {{ build }}
+  number: 0
   skip: True  # [not win]
   missing_dso_whitelist:
     - $RPATH/axscript.pyd
     - $RPATH/win32ui.pyd
     - $RPATH/win32uiole.pyd
+  ignore_run_exports:
+    - vs2015_runtime
 
 requirements:
   build:
     - {{ compiler("c") }}
+    - {{ compiler("cxx") }}
     - m2-patch
     - m2-gcc-libs
   host:
@@ -43,6 +41,7 @@ test:
   requires:
     - pip
   commands:
+    - set LIBRARY_BIN=%PREFIX%\Library\bin
     - pip check
     - python run_test.py
     - python test_win32gui.py
@@ -59,8 +58,8 @@ about:
     - com/License.txt  # BSD-3-CLause
     - com/win32comext/mapi/src/mapi_stub_library/LICENSE  # MIT
     - adodbapi/license.txt  # LGPL-2.1-or-later  summary: Python extensions for Windows
-  description: |
-    A set of extension modules that provides access to many of the Windows API functions.
+  description: A set of extension modules that provides access to many of the Windows API functions.
+  summary: A set of extension modules that provides access to many of the Windows API functions.
   dev_url: https://github.com/mhammond/pywin32
   doc_url: https://mhammond.github.io/pywin32
 
@@ -69,3 +68,6 @@ extra:
     - mingwandroid
     - nicoddemus
     - carlodri
+  # Explicitly skip license linting because of the license complexity
+  skip-lints:
+    - missing_license_family
