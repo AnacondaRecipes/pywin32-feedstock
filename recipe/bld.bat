@@ -1,5 +1,8 @@
 setlocal enabledelayedexpansion
 
+:: Create version file
+echo %VERSION% > pywin32.version.txt
+
 set "STDLIB_DIR=%PREFIX%\Lib;%PREFIX%;%LIBRARY_BIN%"
 %PYTHON% setup.py install --record=record.txt
 
