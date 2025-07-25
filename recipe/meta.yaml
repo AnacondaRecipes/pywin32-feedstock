@@ -1,12 +1,12 @@
 {% set name = "pywin32" %}
-{% set version = "308" %}
+{% set version = "311" %}
 
 package:
-  name: {{ name }}
+  name: {{ name|lower }}
   version: {{ version }}
 
 source:
-  url: https://github.com/mhammond/pywin32/archive/b{{ version }}.tar.gz
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
   sha256: 8aa09d39739764bec2378cfbd45940264c8b7f5a24caa17f04a01f7b750799ce
   patches:
     - patches/0001-remove-PATH-pth-hack.patch
