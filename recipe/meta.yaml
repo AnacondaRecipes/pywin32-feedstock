@@ -22,6 +22,8 @@ build:
     - vs2015_runtime
   script_env:
     - VERSION={{ version }}
+  # Ignore overlinking for Windows system libraries
+  ignore_overlinking: True
 
 requirements:
   build:
