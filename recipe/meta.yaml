@@ -18,6 +18,8 @@ build:
     - $RPATH/axscript.pyd
     - $RPATH/win32ui.pyd
     - $RPATH/win32uiole.pyd
+    - $RPATH/pywintypes313.dll
+    - $RPATH/pythoncom313.dll
     - kernel32.dll
     - user32.dll
     - gdi32.dll
