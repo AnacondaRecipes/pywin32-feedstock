@@ -1,8 +1,7 @@
 setlocal enabledelayedexpansion
 
-:: Create version file in the correct location
-mkdir C:\cygwin64\tmp 2>nul
-echo %VERSION% > C:\cygwin64\tmp\pywin32.version.txt
+:: Create version file in the expected location
+echo %VERSION% > "%TEMP%\pywin32.version.txt"
 
 set "STDLIB_DIR=%PREFIX%\Lib;%PREFIX%;%LIBRARY_BIN%"
 %PYTHON% setup.py install --record=record.txt

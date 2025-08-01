@@ -18,6 +18,14 @@ build:
     - $RPATH/axscript.pyd
     - $RPATH/win32ui.pyd
     - $RPATH/win32uiole.pyd
+    - kernel32.dll
+    - user32.dll
+    - gdi32.dll
+    - advapi32.dll
+    - shell32.dll
+    - ole32.dll
+    - oleaut32.dll
+    - uuid.dll
   ignore_run_exports:
     - vs2015_runtime
   script_env:
@@ -60,7 +68,6 @@ about:
     - Pythonwin/Scintilla/License.txt  # MIT
     - win32/License.txt  # BSD-3-CLause
     - com/License.txt  # BSD-3-CLause
-    - com/win32comext/mapi/src/mapi_stub_library/LICENSE  # MIT
     - adodbapi/license.txt  # LGPL-2.1-or-later  summary: Python extensions for Windows
   description: A set of extension modules that provides access to many of the Windows API functions.
   summary: A set of extension modules that provides access to many of the Windows API functions.
