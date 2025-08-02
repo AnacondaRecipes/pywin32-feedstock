@@ -14,27 +14,7 @@ source:
 build:
   number: 0
   skip: True  # [not win]
-  missing_dso_whitelist:
-    - $RPATH/axscript.pyd
-    - $RPATH/win32ui.pyd
-    - $RPATH/win32uiole.pyd
-    - $RPATH/pywintypes313.dll
-    - $RPATH/pythoncom313.dll
-    - kernel32.dll
-    - user32.dll
-    - gdi32.dll
-    - advapi32.dll
-    - shell32.dll
-    - ole32.dll
-    - oleaut32.dll
-    - uuid.dll
-  ignore_run_exports:
-    - vs2015_runtime
-  script_env:
-    - VERSION={{ version }}
-  # Ignore overlinking for Windows system libraries
-  ignore_overlinking: True
-
+  
 requirements:
   build:
     - {{ compiler("c") }}
@@ -62,17 +42,11 @@ test:
 
 about:
   home: https://github.com/mhammond/pywin32
-  # For more detail on the license look at the following issue
-  # https://github.com/mhammond/pywin32/issues/1127
-  license: HPND AND BSD-3-Clause AND LGPL-2.1-or-later AND MIT
-  license_file:
-    - Pythonwin/License.txt  # BSD-3-CLause
-    - Pythonwin/Scintilla/License.txt  # MIT
-    - win32/License.txt  # BSD-3-CLause
-    - com/License.txt  # BSD-3-CLause
-    - adodbapi/license.txt  # LGPL-2.1-or-later  summary: Python extensions for Windows
-  description: A set of extension modules that provides access to many of the Windows API functions.
-  summary: A set of extension modules that provides access to many of the Windows API functions.
+  license: PSF-2.0
+  license_file: Pythonwin/License.txt
+  summary: Python extensions for Windows
+  description: |
+    A set of extension modules that provides access to many of the Windows API functions.
   dev_url: https://github.com/mhammond/pywin32
   doc_url: https://mhammond.github.io/pywin32
 
@@ -81,6 +55,3 @@ extra:
     - mingwandroid
     - nicoddemus
     - carlodri
-  # Explicitly skip license linting because of the license complexity
-  skip-lints:
-    - missing_license_family
