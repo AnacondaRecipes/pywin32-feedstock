@@ -27,6 +27,7 @@ requirements:
     - {{ compiler("cxx") }}
     - m2-patch
     - m2-gcc-libs
+    - {{ stdlib('c') }}
   host:
     - python
     - pip
