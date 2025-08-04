@@ -14,13 +14,19 @@ source:
 build:
   number: 0
   skip: True  # [not win]
-  
+  missing_dso_whitelist:
+    - $RPATH/axscript.pyd
+    - $RPATH/win32ui.pyd
+    - $RPATH/win32uiole.pyd
+  ignore_run_exports:
+    - vs2015_runtime
+
 requirements:
   build:
     - {{ compiler("c") }}
     - {{ compiler("cxx") }}
-    - msys2-patch
-    - msys2-gcc-libs
+    - m2-patch
+    - m2-gcc-libs
   host:
     - python
     - pip
