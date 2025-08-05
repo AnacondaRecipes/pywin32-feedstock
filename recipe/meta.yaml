@@ -67,5 +67,6 @@ extra:
     - mingwandroid
     - nicoddemus
     - carlodri
-skip-lints:
+  # Explicitly skip license linting because of the license complexity
+  skip-lints:
     - missing_license_family
