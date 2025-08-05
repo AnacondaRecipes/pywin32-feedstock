@@ -49,9 +49,13 @@ test:
 
 about:
   home: https://github.com/mhammond/pywin32
-  license: PSF-2.0
-  license_file: Pythonwin/License.txt
-  license_family: PSF
+  license: HPND AND BSD-3-Clause AND LGPL-2.1-or-later AND MIT
+  license_file:
+    - Pythonwin/License.txt  # BSD-3-CLause
+    - Pythonwin/Scintilla/License.txt  # MIT
+    - win32/License.txt  # BSD-3-CLause
+    - com/License.txt  # BSD-3-CLause
+    - adodbapi/license.txt  # LGPL-2.1-or-later  summary: Python extensions for Windows
   summary: Python extensions for Windows
   description: |
     A set of extension modules that provides access to many of the Windows API functions.
@@ -63,3 +67,5 @@ extra:
     - mingwandroid
     - nicoddemus
     - carlodri
+skip-lints:
+    - missing_license_family
