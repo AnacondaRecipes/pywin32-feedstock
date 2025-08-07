@@ -25,7 +25,6 @@ requirements:
   build:
     - {{ compiler("c") }}
     - {{ compiler("cxx") }}
-    - msys2-patch
     - msys2-gcc-libs
     - {{ stdlib('c') }}
   host:
