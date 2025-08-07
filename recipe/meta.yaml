@@ -55,6 +55,7 @@ about:
     - win32/License.txt  # BSD-3-CLause
     - com/License.txt  # BSD-3-CLause
     - adodbapi/license.txt  # LGPL-2.1-or-later  summary: Python extensions for Windows
+    - com/win32comext/mapi/src/MAPIStubLibrary/LICENSE
   license_family: Other
   summary: Python extensions for Windows
   description: |
