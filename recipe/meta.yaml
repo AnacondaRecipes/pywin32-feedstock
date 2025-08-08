@@ -1,13 +1,13 @@
 {% set name = "pywin32" %}
-{% set version = "308" %}
+{% set version = "311" %}
 
 package:
-  name: {{ name }}
+  name: {{ name|lower }}
   version: {{ version }}
 
 source:
   url: https://github.com/mhammond/pywin32/archive/b{{ version }}.tar.gz
-  sha256: 8aa09d39739764bec2378cfbd45940264c8b7f5a24caa17f04a01f7b750799ce
+  sha256: 4ae3f0d4adacc331733fe1204f7f93b8654615ca325adfc9eb6c67198246a91b
   patches:
     - patches/0001-remove-PATH-pth-hack.patch
 
@@ -25,8 +25,8 @@ requirements:
   build:
     - {{ compiler("c") }}
     - {{ compiler("cxx") }}
-    - m2-patch
-    - m2-gcc-libs
+    - msys2-gcc-libs
+    - {{ stdlib('c') }}
   host:
     - python
     - pip
@@ -48,18 +48,18 @@ test:
 
 about:
   home: https://github.com/mhammond/pywin32
-  # For more detail on the license look at the following issue
-  # https://github.com/mhammond/pywin32/issues/1127
   license: HPND AND BSD-3-Clause AND LGPL-2.1-or-later AND MIT
   license_file:
     - Pythonwin/License.txt  # BSD-3-CLause
     - Pythonwin/Scintilla/License.txt  # MIT
     - win32/License.txt  # BSD-3-CLause
     - com/License.txt  # BSD-3-CLause
-    - com/win32comext/mapi/src/mapi_stub_library/LICENSE  # MIT
     - adodbapi/license.txt  # LGPL-2.1-or-later  summary: Python extensions for Windows
-  description: A set of extension modules that provides access to many of the Windows API functions.
-  summary: A set of extension modules that provides access to many of the Windows API functions.
+    - com/win32comext/mapi/src/MAPIStubLibrary/LICENSE
+  license_family: Other
+  summary: Python extensions for Windows
+  description: |
+    A set of extension modules that provides access to many of the Windows API functions.
   dev_url: https://github.com/mhammond/pywin32
   doc_url: https://mhammond.github.io/pywin32
 
@@ -68,6 +68,4 @@ extra:
     - mingwandroid
     - nicoddemus
     - carlodri
-  # Explicitly skip license linting because of the license complexity
-  skip-lints:
-    - missing_license_family
+
