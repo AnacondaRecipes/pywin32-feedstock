@@ -1,5 +1,5 @@
 {% set name = "pywin32" %}
-{% set version = "311" %}
+{% set version = "312" %}
 
 package:
   name: {{ name|lower }}
@@ -7,13 +7,13 @@ package:
 
 source:
   url: https://github.com/mhammond/pywin32/archive/b{{ version }}.tar.gz
-  sha256: 4ae3f0d4adacc331733fe1204f7f93b8654615ca325adfc9eb6c67198246a91b
+  sha256: 71d959a9f18cf86001e5dca1e30d5046c187eabbb08112cb6ff01e04689f6f7b
   patches:
     - patches/0001-remove-PATH-pth-hack.patch
 
 build:
   number: 0
-  skip: True  # [not win]
+  skip: true  # [not win]
   missing_dso_whitelist:
     - $RPATH/axscript.pyd
     - $RPATH/win32ui.pyd
@@ -68,4 +68,3 @@ extra:
     - mingwandroid
     - nicoddemus
     - carlodri
-
