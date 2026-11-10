@@ -10,7 +10,7 @@ source:
   sha256: 71d959a9f18cf86001e5dca1e30d5046c187eabbb08112cb6ff01e04689f6f7b
 
 build:
-  number: 0
+  number: 1
   skip: True  # [not win]
   missing_dso_whitelist:
     - $RPATH/axscript.pyd
@@ -28,7 +28,7 @@ requirements:
   host:
     - python
     - pip
-    - setuptools >=77.0.3
+    - setuptools >=77.0.3,<84
   run:
     - python
 
