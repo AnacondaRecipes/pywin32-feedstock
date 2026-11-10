@@ -9,7 +9,8 @@ source:
   url: https://github.com/mhammond/pywin32/archive/b{{ version }}.tar.gz
   sha256: 71d959a9f18cf86001e5dca1e30d5046c187eabbb08112cb6ff01e04689f6f7b
   patches:
-    - patches/0001-setuptools84-hashable-extensions.patch
+    - patches/0001-fix-inverted-mfc140u-condition.patch
+    - patches/0002-setuptools84-unhashable-extensions.patch
 
 build:
   number: 1

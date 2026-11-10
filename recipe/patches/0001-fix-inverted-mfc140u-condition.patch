@@ -1,0 +1,25 @@
+From 3cc74e05b4d5680c69fd6c02232a630db7a34675 Mon Sep 17 00:00:00 2001
+From: Avasam <samuel.06@hotmail.com>
+Date: Fri, 12 Jun 2026 10:00:35 -0400
+Subject: [PATCH] Fix inverted condition to include `mfc140u.dll`
+
+---
+ setup.py | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/setup.py b/setup.py
+index 7ea0d4c7..eae24c2f 100644
+--- a/setup.py
++++ b/setup.py
+@@ -601,7 +601,7 @@ class my_build_ext(build_ext):
+         # This is only available from the Visual Studio Installer.
+         # Skip if Pythonwin was also skipped.
+         win32ui_ext = pythonwin_extensions[0]
+-        if win32ui_ext in {ext for ext, why in self.excluded_extensions}:
++        if win32ui_ext not in {ext for ext, why in self.excluded_extensions}:
+             vc_path = next(p for p in Path(self.compiler.cc).parents if p.name == "VC")
+             msvc_version = next(
+                 p for p in Path(self.compiler.cc).parents if p.parent.name == "MSVC"
+-- 
+2.53.0
+
